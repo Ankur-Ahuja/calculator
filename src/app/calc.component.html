@@ -1,0 +1,88 @@
+<!--
+This html component is being used for calculator.
+-->
+<div class="container">
+  <h1>
+    {{ title }}
+  </h1>
+  <form  #calcForm="ngForm" (ngSubmit)="calculate()" novalidate>
+    <!-- 
+      Calculator first number
+     -->
+      <div class="row">
+        <div class="col">
+          <label for="First number">First number</label>  
+        </div>
+        <div class="col">       
+          <input  [(ngModel)]="firstNum" name="firstNumber" id="firstNumber" #firstNumber="ngModel" type="text" [pattern]="calcPattern" required placeholder="Enter first number">
+          <div *ngIf="firstNumber.errors" [ngClass] = "'error'"> 
+            <div *ngIf="firstNumber.errors?.required && firstNumber.touched">
+              Number is required.
+            </div>  
+            <div *ngIf="firstNumber.errors?.pattern">
+              Number is not valid.
+            </div> 
+          </div>          
+        </div>
+      </div>
+      <!-- 
+      Calculator second number
+     -->
+      <div class="row">
+        <div class="col"> 
+          <label for="Second number">Second number</label>         
+        </div>
+        <div class="col"> 
+          <input  [(ngModel)]="secondNum" name="secondNumber" id="secondNumber" #secondNumber="ngModel" type="text" [pattern]="calcPattern" required placeholder="Enter second number">
+          <div *ngIf="secondNumber.errors" [ngClass] = "'error'"> 
+            <div *ngIf="secondNumber.errors?.required && secondNumber.touched">
+              Number is required.
+            </div>  
+            <div *ngIf="secondNumber.errors?.pattern">
+              Number is not valid.
+            </div> 
+          </div> 
+        </div>
+      </div>
+      <!-- 
+      Calculator operations
+     -->      
+      <div class="row">
+        <div class="col"> 
+          <label for="operation">Operation:</label>
+        </div>
+        <div class="col"> 
+          <select name="operation" [(ngModel)]="operation" name="operation">
+            <option value="Add">Add</option>
+            <option value="Subtract">Subtract</option>
+            <option value="Multiply">Multiply</option>
+            <option value="Divide">Divide</option>            
+          </select>   
+        </div>
+      </div>
+      <!-- 
+      Calculator submit for result
+     -->
+      <div class="row">
+        <div class="col"> 
+          <label for="calculate">Calculate result</label>    
+        </div>
+        <div class="col"> 
+          <input class="result" type="submit" name="calculate" value="Calculate"/>
+        </div>
+      </div>
+      <!-- 
+      Calculator result
+     -->
+      <div class="row">
+        <div class="col"> 
+          <label for="result">Result</label>    
+        </div>
+        <div class="col">
+          <b class="result">{{result}}</b>
+        </div>
+      </div>
+
+    
+  </form>
+</div>
